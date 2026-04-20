@@ -1,59 +1,72 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
-class Bogie {
-    String name;
-    int capacity;
-
-    // Constructor
-    Bogie(String name, int capacity) {
-        this.name = name;
-        this.capacity = capacity;
-    }
-
-    // Display method
-    public String toString() {
-        return name + " -> " + capacity + " seats";
-    }
-}
-
+/**
+ * =========================================================
+ * MAIN CLASS - UseCase7TrainConsistMgmt
+ * =========================================================
+ *
+ * Use Case 7: Sort Bogies by Capacity
+ *
+ * Description:
+ * This class sorts passenger bogies based on seating
+ * capacity using a custom Comparator.
+ *
+ * At this stage, the application:
+ * - Creates bogie objects
+ * - Stores them in a List
+ * - Displays unsorted data
+ * - Sorts using Comparator logic
+ * - Displays sorted result
+ *
+ * This maps custom ordering using Comparator.
+ *
+ * @author Developer
+ * @version 7.0
+ */
 public class UC7 {
+
+    // Inner Bogie class to model passenger bogies
+    static class Bogie {
+        String name;
+        int capacity;
+
+        Bogie(String name, int capacity) {
+            this.name = name;
+            this.capacity = capacity;
+        }
+    }
 
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        System.out.println("====================================");
+        System.out.println(" UC7 - Sort Bogies by Capacity (Comparator) ");
+        System.out.println("====================================\n");
 
-        System.out.println("=== Train Consist Management App ===");
-
-        // 🔹 List to store bogies
+        // Create list of passenger bogies
         List<Bogie> bogies = new ArrayList<>();
 
-        // 🔹 User Input
-        System.out.print("\nEnter number of bogies: ");
-        int n = sc.nextInt();
-        sc.nextLine(); // consume newline
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 56));
+        bogies.add(new Bogie("First Class", 24));
+        bogies.add(new Bogie("General", 90));
 
-        for (int i = 0; i < n; i++) {
-            System.out.println("\nEnter details for Bogie " + (i + 1));
-
-            System.out.print("Enter Bogie Name: ");
-            String name = sc.nextLine();
-
-            System.out.print("Enter Capacity: ");
-            int capacity = sc.nextInt();
-            sc.nextLine(); // consume newline
-
-            bogies.add(new Bogie(name, capacity));
+        // Display before sorting
+        System.out.println("Before Sorting:");
+        for (Bogie b : bogies) {
+            System.out.println(b.name + " -> " + b.capacity);
         }
 
-        // 🔹 Sorting using Comparator (by capacity)
+        // Sort using Comparator by capacity
         bogies.sort(Comparator.comparingInt(b -> b.capacity));
 
-        // 🔹 Display Sorted Bogies
-        System.out.println("\nBogies Sorted by Capacity:");
+        // Display after sorting
+        System.out.println("\nAfter Sorting by Capacity:");
         for (Bogie b : bogies) {
-            System.out.println(b);
+            System.out.println(b.name + " -> " + b.capacity);
         }
 
-        System.out.println("\nSorting completed successfully.");
+        System.out.println("\nUC7 sorting completed...");
     }
 }
