@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class UC8 {
+public class UC10 {
 
     static class Bogie {
         String name;
@@ -14,16 +13,16 @@ public class UC8 {
         }
     }
 
-    public static List<Bogie> filterBogies(List<Bogie> bogies, int threshold) {
+    public static int totalSeats(List<Bogie> bogies) {
         return bogies.stream()
-                .filter(b -> b.capacity > threshold)
-                .collect(Collectors.toList());
+                .map(b -> b.capacity)
+                .reduce(0, Integer::sum);
     }
 
     public static void main(String[] args) {
 
         System.out.println("====================================");
-        System.out.println(" UC8 - Filter Passenger Bogies Using Streams ");
+        System.out.println(" UC10 - Count Total Seats in Train ");
         System.out.println("====================================\n");
 
         List<Bogie> bogies = new ArrayList<>();
@@ -31,20 +30,17 @@ public class UC8 {
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
         bogies.add(new Bogie("First Class", 24));
-        bogies.add(new Bogie("General", 90));
+        bogies.add(new Bogie("Sleeper", 70));
 
-        System.out.println("All Bogies:");
+        System.out.println("Bogies in Train:");
         for (Bogie b : bogies) {
             System.out.println(b.name + " -> " + b.capacity);
         }
 
-        List<Bogie> filtered = filterBogies(bogies, 60);
+        int total = totalSeats(bogies);
 
-        System.out.println("\nFiltered Bogies (Capacity > 60):");
-        for (Bogie b : filtered) {
-            System.out.println(b.name + " -> " + b.capacity);
-        }
+        System.out.println("\nTotal Seating Capacity of Train: " + total);
 
-        System.out.println("\nUC8 filtering completed...");
+        System.out.println("\nUC10 aggregation completed...");
     }
 }
